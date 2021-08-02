@@ -89,7 +89,7 @@ public class AlunoController {
 	}
 
 	@PutMapping("v1/alunos")
-	public ResponseEntity<Object> replaceLivro(@RequestBody @Valid Aluno aluno, BindingResult result) {
+	public ResponseEntity<Object> replaceAluno(@RequestBody @Valid Aluno aluno, BindingResult result) {
 		ResponseEntity<Object> response = null;
 		if (result.hasErrors()) {
 			logger.info(">>>>>> 1. controller erro detectado na entrada de dados bean validation");
