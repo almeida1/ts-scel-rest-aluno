@@ -23,7 +23,7 @@ public class AlunoServicoI implements AlunoServico{
 
 	@Override
 	public Aluno consultaPorRa(String ra) {
-		logger.info(">>>>>> 2. servico consulta por isbn chamado");
+		logger.info(">>>>>> 2. servico consulta por ra chamado");
 		return repository.findByRa(ra);
 	}
 
@@ -41,7 +41,8 @@ public class AlunoServicoI implements AlunoServico{
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		logger.info(">>>>>> 2. servico delete chamado");
+		repository.deleteById(id);
 		
 	}
 }
