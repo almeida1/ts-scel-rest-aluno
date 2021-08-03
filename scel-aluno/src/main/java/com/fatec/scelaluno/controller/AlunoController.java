@@ -37,16 +37,26 @@ public class AlunoController {
 	public ResponseEntity<List<Aluno>> consultaTodos() {
 		return ResponseEntity.ok().body(servico.consultaTodos());
 	}
-	@GetMapping("v1/alunos/{ra}")
-	public ResponseEntity<Aluno> findByRa(@PathVariable String ra) {
-		logger.info(">>>>>> 1. controller chamou servico consulta por ra => " + ra);
 
-		return Optional.ofNullable(servico.consultaPorRa(ra)).map(record -> ResponseEntity.ok().body(record))
-				.orElse(ResponseEntity.notFound().build());
+	@GetMapping("v1/alunos/{ra}")
+	public ResponseEntity<?> findByRa(@PathVariable String ra) {
+		logger.info(">>>>>> 1. controller chamou servico consulta por ra => " + ra);
+		Optional<Aluno> umAluno = Optional.ofNullable(servico.consultaPorRa(ra));
+		ResponseEntity<?> resposta = null;
+		if (umAluno.isPresent())
+			resposta = new ResponseEntity<Aluno>(umAluno.get(), HttpStatus.OK);
+		else
+			resposta = new ResponseEntity<String>("RA não localizado",HttpStatus.BAD_REQUEST);
+		return resposta;
+		//associar o responseentity a um string
+		//return Optional.ofNullable(servico.consultaPorRa(ra)).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.badRequest().build());
+
 	}
 
 	@PostMapping("/v1/alunos")
 	public ResponseEntity<Object> create(@RequestBody @Valid Aluno aluno, BindingResult result) {
+		//Spring automatically deserializes the JSON into a Java type, assuming an appropriate one is specified.
+		//By default, the type we annotate with the @RequestBody annotation must correspond to the JSON sent from our client-side controller
 		ResponseEntity<Object> response = null;
 		if (result.hasErrors()) {
 			logger.info(">>>>>> 1. controller erro detectado na entrada de dados bean validation");
