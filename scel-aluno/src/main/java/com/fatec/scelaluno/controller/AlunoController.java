@@ -46,7 +46,7 @@ public class AlunoController {
 		if (umAluno.isPresent())
 			resposta = new ResponseEntity<Aluno>(umAluno.get(), HttpStatus.OK);
 		else
-			resposta = new ResponseEntity<String>("RA não localizado",HttpStatus.OK);
+			resposta = new ResponseEntity<String>("RA não localizado",HttpStatus.BAD_REQUEST);
 		return resposta;
 		//associar o responseentity a um string
 		//return Optional.ofNullable(servico.consultaPorRa(ra)).map(record -> ResponseEntity.ok().body(record)).orElse(ResponseEntity.badRequest().build());
