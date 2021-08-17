@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ScelAlunoApplication {
-
+//teste 
+	//teste 2
 	public static void main(String[] args) {
 		SpringApplication.run(ScelAlunoApplication.class, args);
 	}
